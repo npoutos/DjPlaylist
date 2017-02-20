@@ -1,0 +1,10 @@
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\obj\Debug\DJPlaylistsModel.csprojResolveAssemblyReference.cache
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\DJPlaylistsModel.dll.config
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\DJPlaylistsModel.dll
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\DJPlaylistsModel.pdb
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\EntityFramework.dll
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\EntityFramework.xml
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\obj\Debug\DJPlaylistsModel.dll
+C:\Users\pouto\Documents\Projects\DJPlaylists\DJPlaylistsModel\obj\Debug\DJPlaylistsModel.pdb

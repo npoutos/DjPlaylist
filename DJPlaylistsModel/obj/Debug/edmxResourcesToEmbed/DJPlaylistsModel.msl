@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DJPlaylistModelStoreContainer" CdmEntityContainer="DJPlaylistEntities">
+    <EntitySetMapping Name="USERS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.USER">
+        <MappingFragment StoreEntitySet="USERS">
+          <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+          <ScalarProperty Name="LAST_NAME" ColumnName="LAST_NAME" />
+          <ScalarProperty Name="FIRST_NAME" ColumnName="FIRST_NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="IS_ACTIVE" ColumnName="IS_ACTIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="GENRES">
+      <EntityTypeMapping TypeName="DJPlaylistModel.GENRE">
+        <MappingFragment StoreEntitySet="GENRES">
+          <ScalarProperty Name="DESCRIPTION" ColumnName="DESCRIPTION" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLAYLIST_SONGS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.PLAYLIST_SONG">
+        <MappingFragment StoreEntitySet="PLAYLIST_SONGS">
+          <ScalarProperty Name="ORDER" ColumnName="ORDER" />
+          <ScalarProperty Name="SONG_ID" ColumnName="SONG_ID" />
+          <ScalarProperty Name="PLAYLIST_ID" ColumnName="PLAYLIST_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PLAYLISTS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.PLAYLIST">
+        <MappingFragment StoreEntitySet="PLAYLISTS">
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="IS_PUBLIC" ColumnName="IS_PUBLIC" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SONGS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.SONG">
+        <MappingFragment StoreEntitySet="SONGS">
+          <ScalarProperty Name="ALBUM_NAME" ColumnName="ALBUM_NAME" />
+          <ScalarProperty Name="YEAR" ColumnName="YEAR" />
+          <ScalarProperty Name="DURATION_SECS" ColumnName="DURATION_SECS" />
+          <ScalarProperty Name="ARTIST_NAME" ColumnName="ARTIST_NAME" />
+          <ScalarProperty Name="NAME" ColumnName="NAME" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="USER_PLAYLISTS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.USER_PLAYLIST">
+        <MappingFragment StoreEntitySet="USER_PLAYLISTS">
+          <ScalarProperty Name="DATE_CREATED" ColumnName="DATE_CREATED" />
+          <ScalarProperty Name="PLAYLIST_ID" ColumnName="PLAYLIST_ID" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SONG_PLAYS">
+      <EntityTypeMapping TypeName="DJPlaylistModel.SONG_PLAY">
+        <MappingFragment StoreEntitySet="SONG_PLAYS">
+          <ScalarProperty Name="DATE_PLAYED" ColumnName="DATE_PLAYED" />
+          <ScalarProperty Name="USER_ID" ColumnName="USER_ID" />
+          <ScalarProperty Name="SONG_ID" ColumnName="SONG_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SONG_GENRES">
+      <EntityTypeMapping TypeName="DJPlaylistModel.SONG_GENRE">
+        <MappingFragment StoreEntitySet="SONG_GENRES">
+          <ScalarProperty Name="GENRE_ID" ColumnName="GENRE_ID" />
+          <ScalarProperty Name="SONG_ID" ColumnName="SONG_ID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,98 @@
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<div class="page-header">
+    <h1>PlaylistsService</h1>
+</div>
+
+<div class="row">
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Available Playlists</h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: playlists">
+                    <li>
+                        <strong><span data-bind="text: Name"></span><br /></strong>
+                        <strong>Deejay</strong>&nbsp;<span data-bind="text: DeejayName"></span><br />
+                        <strong>Songs Num.</strong>&nbsp;<span data-bind="text: SongCount"></span><br />
+                        <strong>PlayTime</strong>&nbsp;<span data-bind="text: PlayTime"></span><br />
+                        <small><a href="#" data-bind="click: $parent.getPlaylistDetail">Details</a></small>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="alert alert-danger" data-bind="visible: error"><p data-bind="text: error"></p></div>
+    </div>
+
+    <!-- ko if:detail() -->
+
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title"><strong><span data-bind="text: currentPlaylistName"></span> Songs</strong></h2>
+            </div>
+            <div class="panel-body">
+                <ul class="list-unstyled" data-bind="foreach: detail().PlaylistSongs">
+                    <li>
+                        <strong><span data-bind="text: Song.Title"></span><br />
+                        </strong><strong>Artist</strong>&nbsp;<span data-bind="text: Song.Artist"></span><br />
+                        <strong>Album</strong>&nbsp;<span data-bind="text: Song.Album"></span><br />
+                        <strong>Genre</strong>&nbsp;<span data-bind="text: Song.Genre"></span><br />
+                        <strong>Year</strong>&nbsp;<span data-bind="text: Song.Year"></span><br />
+                        <strong>SongPlays:</strong>&nbsp;<span data-bind="text: SongPlays"></span><br />
+                        <small><a href="#" data-bind="click: $parent.deletePlaylistSong">remove</a></small>
+                        <small><a href="#" data-bind="click: $parent.playPlaylistSong">play</a></small>
+                        <hr />
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+    </div>
+
+    
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Add Song To Playlist&nbsp;<span data-bind="text: currentPlaylistName"></span></h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addPlaylistSong">
+                    <div class="form-group">
+                        <label for="inputSong" class="col-sm-2 control-label">Song</label>
+                        <div class="col-sm-10">
+                            <select data-bind="options:songs, optionsText: 'TitleArtist', value: newPlaylistSong.Song"></select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Rename Playlist&nbsp;<span data-bind="text: currentPlaylistName"></span></h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: renamePlaylist">
+                    <div class="form-group">
+                        <label for="inputNewPlaylistName" class="col-sm-2 control-label">New Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="inputNewPlaylistName" data-bind="value:newPlaylistName" />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- /ko -->
+</div>

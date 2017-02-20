@@ -1,0 +1,249 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DJPlaylistModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="USER">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DATE_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="IS_ACTIVE" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="PLAYLISTS" Relationship="DJPlaylistModel.FK_USER_ID" FromRole="USER" ToRole="PLAYLIST" />
+    <NavigationProperty Name="USER_PLAYLISTS" Relationship="DJPlaylistModel.FK_USER_PLAYLISTS_USER_ID" FromRole="USER" ToRole="USER_PLAYLISTS" />
+    <Property Name="FIRST_NAME" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="LAST_NAME" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SONG_PLAYS" Relationship="DJPlaylistModel.FK_SONG_PLAYS_USER_ID" FromRole="USER" ToRole="SONG_PLAYS" />
+  </EntityType>
+  <EntityContainer Name="DJPlaylistEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="USERS" EntityType="Self.USER" />
+    <EntitySet Name="GENRES" EntityType="DJPlaylistModel.GENRE" />
+    <EntitySet Name="PLAYLIST_SONGS" EntityType="DJPlaylistModel.PLAYLIST_SONG" />
+    <EntitySet Name="PLAYLISTS" EntityType="DJPlaylistModel.PLAYLIST" />
+    <EntitySet Name="SONGS" EntityType="DJPlaylistModel.SONG" />
+    <AssociationSet Name="FK_PLAYLIST_SONG_PLAYLIST_ID" Association="DJPlaylistModel.FK_PLAYLIST_SONG_PLAYLIST_ID">
+      <End Role="PLAYLIST" EntitySet="PLAYLISTS" />
+      <End Role="PLAYLIST_SONGS" EntitySet="PLAYLIST_SONGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_PLAYLIST_SONG_SONG_ID" Association="DJPlaylistModel.FK_PLAYLIST_SONG_SONG_ID">
+      <End Role="SONG" EntitySet="SONGS" />
+      <End Role="PLAYLIST_SONGS" EntitySet="PLAYLIST_SONGS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_ID" Association="DJPlaylistModel.FK_USER_ID">
+      <End Role="USER" EntitySet="USERS" />
+      <End Role="PLAYLIST" EntitySet="PLAYLISTS" />
+    </AssociationSet>
+    <EntitySet Name="USER_PLAYLIST" EntityType="DJPlaylistModel.USER_PLAYLIST" />
+    <AssociationSet Name="FK_USER_PLAYLISTS_PLAYLIST_ID" Association="DJPlaylistModel.FK_USER_PLAYLISTS_PLAYLIST_ID">
+      <End Role="PLAYLIST" EntitySet="PLAYLISTS" />
+      <End Role="USER_PLAYLISTS" EntitySet="USER_PLAYLIST" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USER_PLAYLISTS_USER_ID" Association="DJPlaylistModel.FK_USER_PLAYLISTS_USER_ID">
+      <End Role="USER" EntitySet="USERS" />
+      <End Role="USER_PLAYLISTS" EntitySet="USER_PLAYLIST" />
+    </AssociationSet>
+    <EntitySet Name="SONG_PLAY" EntityType="DJPlaylistModel.SONG_PLAY" />
+    <AssociationSet Name="FK_SONG_PLAYS_SONG_ID" Association="DJPlaylistModel.FK_SONG_PLAYS_SONG_ID">
+      <End Role="SONG" EntitySet="SONGS" />
+      <End Role="SONG_PLAYS" EntitySet="SONG_PLAY" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SONG_PLAYS_USER_ID" Association="DJPlaylistModel.FK_SONG_PLAYS_USER_ID">
+      <End Role="USER" EntitySet="USERS" />
+      <End Role="SONG_PLAYS" EntitySet="SONG_PLAY" />
+    </AssociationSet>
+    <EntitySet Name="SONG_GENRES" EntityType="DJPlaylistModel.SONG_GENRE" />
+    <AssociationSet Name="FK_SONG_GENRES_GENRE_ID" Association="DJPlaylistModel.FK_SONG_GENRES_GENRE_ID">
+      <End Role="GENRE" EntitySet="GENRES" />
+      <End Role="SONG_GENRES" EntitySet="SONG_GENRES" />
+    </AssociationSet>
+    <AssociationSet Name="FK_SONG_GENRES_SONG_ID" Association="DJPlaylistModel.FK_SONG_GENRES_SONG_ID">
+      <End Role="SONG" EntitySet="SONGS" />
+      <End Role="SONG_GENRES" EntitySet="SONG_GENRES" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="GENRE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DESCRIPTION" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SONG_GENRES" Relationship="DJPlaylistModel.FK_SONG_GENRES_GENRE_ID" FromRole="GENRE" ToRole="SONG_GENRES" />
+  </EntityType>
+  <EntityType Name="PLAYLIST_SONG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PLAYLIST_ID" Type="Int32" Nullable="false" />
+    <Property Name="SONG_ID" Type="Int32" Nullable="false" />
+    <Property Name="ORDER" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PLAYLIST" Relationship="DJPlaylistModel.FK_PLAYLIST_SONG_PLAYLIST_ID" FromRole="PLAYLIST_SONGS" ToRole="PLAYLIST" />
+    <NavigationProperty Name="SONG" Relationship="DJPlaylistModel.FK_PLAYLIST_SONG_SONG_ID" FromRole="PLAYLIST_SONGS" ToRole="SONG" />
+  </EntityType>
+  <EntityType Name="PLAYLIST">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="IS_PUBLIC" Type="Boolean" Nullable="false" />
+    <Property Name="DATE_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PLAYLIST_SONGS" Relationship="DJPlaylistModel.FK_PLAYLIST_SONG_PLAYLIST_ID" FromRole="PLAYLIST" ToRole="PLAYLIST_SONGS" />
+    <NavigationProperty Name="USER" Relationship="DJPlaylistModel.FK_USER_ID" FromRole="PLAYLIST" ToRole="USER" />
+    <NavigationProperty Name="USER_PLAYLISTS" Relationship="DJPlaylistModel.FK_USER_PLAYLISTS_PLAYLIST_ID" FromRole="PLAYLIST" ToRole="USER_PLAYLISTS" />
+  </EntityType>
+  <EntityType Name="SONG">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NAME" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ARTIST_NAME" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="DURATION_SECS" Type="Int32" Nullable="false" />
+    <Property Name="YEAR" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PLAYLIST_SONGS" Relationship="DJPlaylistModel.FK_PLAYLIST_SONG_SONG_ID" FromRole="SONG" ToRole="PLAYLIST_SONGS" />
+    <NavigationProperty Name="SONG_PLAYS" Relationship="DJPlaylistModel.FK_SONG_PLAYS_SONG_ID" FromRole="SONG" ToRole="SONG_PLAYS" />
+    <Property Name="ALBUM_NAME" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SONG_GENRES" Relationship="DJPlaylistModel.FK_SONG_GENRES_SONG_ID" FromRole="SONG" ToRole="SONG_GENRES" />
+  </EntityType>
+  <Association Name="FK_PLAYLIST_SONG_PLAYLIST_ID">
+    <End Type="DJPlaylistModel.PLAYLIST" Role="PLAYLIST" Multiplicity="1" />
+    <End Type="DJPlaylistModel.PLAYLIST_SONG" Role="PLAYLIST_SONGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLAYLIST">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLAYLIST_SONGS">
+        <PropertyRef Name="PLAYLIST_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_PLAYLIST_SONG_SONG_ID">
+    <End Type="DJPlaylistModel.SONG" Role="SONG" Multiplicity="1" />
+    <End Type="DJPlaylistModel.PLAYLIST_SONG" Role="PLAYLIST_SONGS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SONG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLAYLIST_SONGS">
+        <PropertyRef Name="SONG_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_ID">
+    <End Type="DJPlaylistModel.USER" Role="USER" Multiplicity="1" />
+    <End Type="DJPlaylistModel.PLAYLIST" Role="PLAYLIST" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="PLAYLIST">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="USER_PLAYLIST">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="PLAYLIST_ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE_CREATED" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="PLAYLIST" Relationship="DJPlaylistModel.FK_USER_PLAYLISTS_PLAYLIST_ID" FromRole="USER_PLAYLISTS" ToRole="PLAYLIST" />
+    <NavigationProperty Name="USER" Relationship="DJPlaylistModel.FK_USER_PLAYLISTS_USER_ID" FromRole="USER_PLAYLISTS" ToRole="USER" />
+  </EntityType>
+  <Association Name="FK_USER_PLAYLISTS_PLAYLIST_ID">
+    <End Type="DJPlaylistModel.PLAYLIST" Role="PLAYLIST" Multiplicity="1" />
+    <End Type="DJPlaylistModel.USER_PLAYLIST" Role="USER_PLAYLISTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PLAYLIST">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USER_PLAYLISTS">
+        <PropertyRef Name="PLAYLIST_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_USER_PLAYLISTS_USER_ID">
+    <End Type="DJPlaylistModel.USER" Role="USER" Multiplicity="1" />
+    <End Type="DJPlaylistModel.USER_PLAYLIST" Role="USER_PLAYLISTS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="USER_PLAYLISTS">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SONG_PLAY">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SONG_ID" Type="Int32" Nullable="false" />
+    <Property Name="USER_ID" Type="Int32" Nullable="false" />
+    <Property Name="DATE_PLAYED" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="SONG" Relationship="DJPlaylistModel.FK_SONG_PLAYS_SONG_ID" FromRole="SONG_PLAYS" ToRole="SONG" />
+    <NavigationProperty Name="USER" Relationship="DJPlaylistModel.FK_SONG_PLAYS_USER_ID" FromRole="SONG_PLAYS" ToRole="USER" />
+  </EntityType>
+  <Association Name="FK_SONG_PLAYS_SONG_ID">
+    <End Type="DJPlaylistModel.SONG" Role="SONG" Multiplicity="1" />
+    <End Type="DJPlaylistModel.SONG_PLAY" Role="SONG_PLAYS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SONG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SONG_PLAYS">
+        <PropertyRef Name="SONG_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SONG_PLAYS_USER_ID">
+    <End Type="DJPlaylistModel.USER" Role="USER" Multiplicity="1" />
+    <End Type="DJPlaylistModel.SONG_PLAY" Role="SONG_PLAYS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USER">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SONG_PLAYS">
+        <PropertyRef Name="USER_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="SONG_GENRE">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SONG_ID" Type="Int32" Nullable="false" />
+    <Property Name="GENRE_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="GENRE" Relationship="DJPlaylistModel.FK_SONG_GENRES_GENRE_ID" FromRole="SONG_GENRES" ToRole="GENRE" />
+    <NavigationProperty Name="SONG" Relationship="DJPlaylistModel.FK_SONG_GENRES_SONG_ID" FromRole="SONG_GENRES" ToRole="SONG" />
+  </EntityType>
+  <Association Name="FK_SONG_GENRES_GENRE_ID">
+    <End Type="DJPlaylistModel.GENRE" Role="GENRE" Multiplicity="1" />
+    <End Type="DJPlaylistModel.SONG_GENRE" Role="SONG_GENRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GENRE">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SONG_GENRES">
+        <PropertyRef Name="GENRE_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_SONG_GENRES_SONG_ID">
+    <End Type="DJPlaylistModel.SONG" Role="SONG" Multiplicity="1" />
+    <End Type="DJPlaylistModel.SONG_GENRE" Role="SONG_GENRES" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SONG">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="SONG_GENRES">
+        <PropertyRef Name="SONG_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>
